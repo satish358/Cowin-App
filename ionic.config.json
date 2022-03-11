@@ -1,0 +1,7 @@
+{
+  "name": "cowin-cross",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
