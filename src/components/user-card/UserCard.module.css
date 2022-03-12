@@ -1,0 +1,14 @@
+.fullyVaccinated {
+  border: 1px solid var(--ion-color-success);
+  border-left-color: var(--ion-color-success);
+  border-left-width: 7px;
+  border-left-style: solid;
+}
+
+.cardContents {
+  padding-bottom: 0px;
+}
+
+.cardHeader {
+  padding-bottom: 10px;
+}

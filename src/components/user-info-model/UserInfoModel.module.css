@@ -1,0 +1,19 @@
+.modelContainer {
+  padding: 20px;
+}
+
+.isSuccess {
+  border-left: solid 5px var(--ion-color-success);
+}
+.isWaiting {
+  border-left: solid 5px var(--ion-color-warning);
+}
+.imageContainer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px;
+}
+
+.image {
+  vertical-align: middle;
+}
