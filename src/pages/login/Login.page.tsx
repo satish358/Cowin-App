@@ -1,22 +1,30 @@
-import React, { useState } from 'react'
-import { IonButton, IonCol, IonContent, IonGrid, IonPage, IonRow,  IonText } from '@ionic/react';
+import React, { useEffect, useState } from 'react'
+import { IonButton, IonCol, IonContent, IonGrid, IonPage, IonRow,  IonText, useIonLoading } from '@ionic/react';
 import {TextField } from '@mui/material';
 
 import styles from './Login.module.css';
 import medicalCareImg from './undraw_doctors_hwty.svg';
+import { useConfirmOTP, useGenerateOTP } from '../../services/auth';
 const LoginPage = () => {
   const [isOtpSent, setIsOtpSent] = useState<boolean>(false);
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const [otp, setOtp] = useState<string>('');
 
-  const generateOtp = () => {
-    setIsOtpSent(true);
+  const {mutate: generateOTPApi,  isSuccess: isGenerateOTPSuccess} = useGenerateOTP();
+  const {mutate: confirmOtpApi } = useConfirmOTP();
+
+  useEffect(() => {
+    if (isGenerateOTPSuccess)
+      setIsOtpSent(true);
+  }, [isGenerateOTPSuccess]);
+  
+  const onGenerateOtp = () => {
+    generateOTPApi(mobileNumber); 
   }
-  const verifyOtp = () => {
-    setIsOtpSent(false);
+  const onVerifyOtp = () => {
+    confirmOtpApi(otp);
   }
   return (
-
     <IonPage>
       <IonContent>      
         <IonGrid className={styles?.loginContainer}>
@@ -37,8 +45,8 @@ const LoginPage = () => {
           <IonRow className={styles?.buttonsContainer}>
             <IonCol>
               {
-                isOtpSent ? <IonButton onClick={verifyOtp} expand='block' mode='ios' color='primary' fill='outline'>Verify OTP</IonButton>
-                : <IonButton onClick={generateOtp} expand='block' mode='ios' color='primary' fill='outline'>Send OTP</IonButton>
+                isOtpSent ? <IonButton onClick={onVerifyOtp} expand='block' mode='ios' color='primary' fill='outline'>Verify OTP</IonButton>
+                : <IonButton onClick={onGenerateOtp} expand='block' mode='ios' color='primary' fill='outline'>Send OTP</IonButton>
               }
             </IonCol>
 
@@ -46,8 +54,6 @@ const LoginPage = () => {
         </IonGrid>
       </IonContent>
     </IonPage>
-     
-  
   )
 }
 

@@ -4,6 +4,7 @@ import { mapOutline, navigateOutline } from 'ionicons/icons'
 import { TextField, MenuItem,Select, FormControl, InputLabel } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select';
 import styles from './Search.module.css';
+import { VaccineResult } from '../../components/vaccine-result/VaccineResult';
 
 export const SearchPage = () => {
 
@@ -112,6 +113,9 @@ export const SearchPage = () => {
                     </IonCol>
                 </IonRow>
             </IonGrid>}
+
+
+            <VaccineResult />
         </IonContent>
     </IonPage>
   )
